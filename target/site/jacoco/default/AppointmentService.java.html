@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AppointmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myartifactid</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">AppointmentService.java</span></div><h1>AppointmentService.java</h1><pre class="source lang-java linenums">import java.util.HashMap;
+import java.util.Map;
+
+public class AppointmentService{
+  private static AppointmentService instance;
+  private Map&lt;String, Appointment&gt; appointments;
+  private int appointmentId;
+
+<span class="fc" id="L9">  private AppointmentService(){</span>
+<span class="fc" id="L10">    appointments = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L11">    appointmentId = 0;</span>
+<span class="fc" id="L12">  }</span>
+  public static AppointmentService getInstance(){
+<span class="fc bfc" id="L14" title="All 2 branches covered.">    if(instance == null){</span>
+<span class="fc" id="L15">      instance = new AppointmentService();</span>
+    }
+<span class="fc" id="L17">    return instance;</span>
+  }
+
+  public String generateAppointmentId(){
+<span class="fc" id="L21">    appointmentId++;</span>
+<span class="fc" id="L22">    String formatString = String.format(&quot;%03d&quot;, appointmentId);</span>
+<span class="fc" id="L23">    return formatString;</span>
+  }
+  
+  public void addAppointment(Appointment appointment){
+<span class="fc bfc" id="L27" title="All 2 branches covered.">    if(appointment.getApptId() == null){</span>
+<span class="fc" id="L28">      appointment.setApptId(generateAppointmentId());</span>
+<span class="fc" id="L29">    }else{throw new IllegalArgumentException(&quot;Appointment is already in list: &quot; + appointment.getApptId());}</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">    if(!appointments.containsKey(appointment.getApptId())){</span>
+<span class="fc" id="L31">      appointments.put(appointment.getApptId(), appointment);</span>
+<span class="nc" id="L32">    }else{throw new IllegalArgumentException(&quot;AppointmentId not unique&quot;);}//cant be tested bc we have no way to reach this without throwing an error else where</span>
+<span class="fc" id="L33">  }</span>
+  
+  public void deleteAppointment(String appointmentId){
+<span class="fc" id="L36">    appointments.remove(appointmentId);</span>
+<span class="fc" id="L37">  }</span>
+  
+  public void updateAppointment(String appointmentId, String apptDate, String apptDesc){
+<span class="fc" id="L40">    Appointment appointment = appointments.get(appointmentId);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">    if(appointment != null){</span>
+<span class="fc" id="L42">      appointment.setApptDate(apptDate);</span>
+<span class="fc" id="L43">      appointment.setApptDesc(apptDesc);</span>
+    }else{
+<span class="fc" id="L45">      throw new IllegalArgumentException(&quot;Appointment not found&quot;);</span>
+    }
+<span class="fc" id="L47">  }</span>
+  
+  public Appointment getAppointment(String appointmentId){
+<span class="fc" id="L50">    return appointments.get(appointmentId);</span>
+  }
+  
+  public void printAppointments(){
+<span class="fc bfc" id="L54" title="All 2 branches covered.">    for(Appointment appointment : appointments.values()){</span>
+<span class="fc" id="L55">      appointment.printAppointmentDetails();</span>
+<span class="fc" id="L56">    }</span>
+<span class="fc" id="L57">  }</span>
+  
+  public Map&lt;String, Appointment&gt; getAllAppointments() {
+<span class="fc" id="L60">        return appointments;</span>
+    }
+  public void clearAppointments() {
+<span class="fc" id="L63">        appointments.clear();</span>
+<span class="fc" id="L64">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

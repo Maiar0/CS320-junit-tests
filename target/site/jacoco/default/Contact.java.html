@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Contact.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myartifactid</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Contact.java</span></div><h1>Contact.java</h1><pre class="source lang-java linenums">public class Contact{
+  //intialize variables
+  private String contactId;
+  private String firstName;
+  private String lastName;
+  private String phone;
+  private String address;
+
+<span class="fc" id="L9">  public Contact(String firstName, String lastName, String phone, String address){</span>
+    //catch errors in formatting 
+<span class="fc bfc" id="L11" title="All 6 branches covered.">    if (firstName == null || firstName.isEmpty() || firstName.length() &gt; 10) {</span>
+<span class="fc" id="L12">        throw new IllegalArgumentException(&quot;Invalid first name: must not be null, empty, or exceed 10 characters.&quot;);</span>
+    }
+<span class="fc bfc" id="L14" title="All 6 branches covered.">    if (lastName == null || lastName.isEmpty() || lastName.length() &gt; 10) {</span>
+<span class="fc" id="L15">        throw new IllegalArgumentException(&quot;Invalid last name: must not be null, empty, or exceed 10 characters.&quot;);</span>
+    }
+<span class="fc bfc" id="L17" title="All 6 branches covered.">    if (phone == null || phone.isEmpty() || phone.length() != 10) {</span>
+<span class="fc" id="L18">        throw new IllegalArgumentException(&quot;Invalid phone number: must be exactly 10 digits long.&quot;);</span>
+    }
+<span class="fc bfc" id="L20" title="All 6 branches covered.">    if (address == null || address.isEmpty() || address.length() &gt; 30) {</span>
+<span class="fc" id="L21">        throw new IllegalArgumentException(&quot;Invalid address: must not be null, empty, or exceed 30 characters.&quot;);</span>
+    }
+<span class="fc" id="L23">    this.firstName = firstName;</span>
+<span class="fc" id="L24">    this.lastName = lastName;</span>
+<span class="fc" id="L25">    this.phone = phone;</span>
+<span class="fc" id="L26">    this.address = address;</span>
+<span class="fc" id="L27">  }</span>
+  //getters
+  public String getContactId(){
+<span class="fc" id="L30">    return contactId;</span>
+  }
+  public String getFirstName(){
+<span class="fc" id="L33">    return firstName;</span>
+  }
+  public String getLastName(){
+<span class="fc" id="L36">    return lastName;</span>
+  }
+  public String getPhone(){
+<span class="fc" id="L39">    return phone;</span>
+  }
+  public String getAddress(){
+<span class="fc" id="L42">    return address;</span>
+  }
+ //setters
+  public void setContactId(String contactId) {
+<span class="fc" id="L46">    ContactService contactService = ContactService.getInstance();</span>
+<span class="fc bfc" id="L47" title="All 8 branches covered.">    if(contactService.getAllContacts().containsKey(contactId) || contactId == null || contactId.isEmpty() || contactId.length() &gt; 10){</span>
+<span class="fc" id="L48">      throw new IllegalArgumentException(&quot;Invalid contact ID&quot;);</span>
+    }else{
+<span class="fc" id="L50">      this.contactId = contactId;</span>
+    }
+<span class="fc" id="L52">  }</span>
+  public void setFirstName(String firstName){
+<span class="fc bfc" id="L54" title="All 6 branches covered.">    if(firstName != null &amp;&amp; !firstName.isEmpty() &amp;&amp; firstName.length()&lt;= 10){</span>
+<span class="fc" id="L55">      this.firstName = firstName;</span>
+<span class="fc" id="L56">    }else{throw new IllegalArgumentException(&quot;Invalid first name length&quot;);}</span>
+<span class="fc" id="L57">  }</span>
+
+  public void setLastName(String lastName){
+<span class="fc bfc" id="L60" title="All 6 branches covered.">    if(lastName != null &amp;&amp; !lastName.isEmpty() &amp;&amp; lastName.length() &lt;= 10){</span>
+<span class="fc" id="L61">      this.lastName = lastName;</span>
+<span class="fc" id="L62">    }else{throw new IllegalArgumentException(&quot;Invalid last name length&quot;);}</span>
+<span class="fc" id="L63">  }</span>
+  public void setPhone(String phone){
+<span class="fc bfc" id="L65" title="All 6 branches covered.">    if(phone != null &amp;&amp; !phone.isEmpty() &amp;&amp; phone.length() == 10){</span>
+<span class="fc" id="L66">      this.phone = phone;</span>
+<span class="fc" id="L67">    }else{throw new IllegalArgumentException(&quot;Invalid phone number&quot;);}</span>
+<span class="fc" id="L68">  }</span>
+  public void setAddress(String address){
+<span class="fc bfc" id="L70" title="All 6 branches covered.">    if(address != null &amp;&amp; !address.isEmpty() &amp;&amp; address.length() &lt;= 30){</span>
+<span class="fc" id="L71">    this.address = address;</span>
+<span class="fc" id="L72">    }else{throw new IllegalArgumentException(&quot;Invalid Address&quot;);}</span>
+<span class="fc" id="L73">  }</span>
+
+  // Method to print contact details
+  public void printContactDetails() {
+<span class="fc" id="L77">      System.out.println(&quot;Contact ID: &quot; + contactId);</span>
+<span class="fc" id="L78">      System.out.println(&quot;First Name: &quot; + firstName);</span>
+<span class="fc" id="L79">      System.out.println(&quot;Last Name: &quot; + lastName);</span>
+<span class="fc" id="L80">      System.out.println(&quot;Phone: &quot; + phone);</span>
+<span class="fc" id="L81">      System.out.println(&quot;Address: &quot; + address);</span>
+<span class="fc" id="L82">      System.out.println();</span>
+<span class="fc" id="L83">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+myartifactid,default,Appointment,0,164,0,22,0,43,0,19,0,8
+myartifactid,default,Task,0,137,0,28,0,29,0,22,0,8
+myartifactid,default,ContactService,5,152,1,9,1,36,1,14,0,10
+myartifactid,default,TaskService,5,140,1,9,1,32,1,14,0,10
+myartifactid,default,Main,4,0,0,0,2,0,2,0,2,0
+myartifactid,default,AppointmentService,5,130,1,9,1,32,1,14,0,10
+myartifactid,default,Contact,0,245,0,56,0,47,0,40,0,12

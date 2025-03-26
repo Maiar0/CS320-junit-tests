@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TaskService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myartifactid</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">TaskService.java</span></div><h1>TaskService.java</h1><pre class="source lang-java linenums">import java.util.HashMap;
+import java.util.Map;
+
+public class TaskService{
+  private static TaskService instance;
+  private Map&lt;String, Task&gt; tasks;
+  private int taskId;
+  
+<span class="fc" id="L9">  private TaskService(){</span>
+<span class="fc" id="L10">    tasks = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L11">  }</span>
+  
+  public static TaskService getInstance(){
+<span class="fc bfc" id="L14" title="All 2 branches covered.">    if(instance == null){</span>
+<span class="fc" id="L15">      instance = new TaskService();</span>
+    }
+<span class="fc" id="L17">    return instance; </span>
+  }
+  
+  public String generateTaskId(){
+<span class="fc" id="L21">    taskId++;</span>
+<span class="fc" id="L22">    String formatString = String.format(&quot;%03d&quot;, taskId);</span>
+<span class="fc" id="L23">    return formatString;</span>
+  }
+  
+  public void addTask(Task task){//FIXME
+<span class="fc bfc" id="L27" title="All 2 branches covered.">    if(task.getTaskId() == null){</span>
+<span class="fc" id="L28">      task.setTaskId(generateTaskId());</span>
+<span class="fc" id="L29">    }else{ throw new IllegalArgumentException(&quot;Task is already in list: &quot; + task.getTaskId());}</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">    if(!tasks.containsKey(task.getTaskId())){</span>
+<span class="fc" id="L31">      tasks.put(task.getTaskId(), task);</span>
+<span class="nc" id="L32">    }else{throw new IllegalArgumentException(&quot;TaskId not unique&quot;);}//not testable</span>
+<span class="fc" id="L33">  }</span>
+  public void deleteTask(String taskId){//FIXME
+<span class="fc" id="L35">    tasks.remove(taskId);</span>
+<span class="fc" id="L36">  }</span>
+  public void updateTask(String taskId, String name, String desc){
+<span class="fc" id="L38">    Task task = tasks.get(taskId);</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">    if (task != null) {</span>
+<span class="fc" id="L40">      task.setName(name);</span>
+<span class="fc" id="L41">      task.setDescription(desc);</span>
+<span class="fc" id="L42">      tasks.put(taskId, task);</span>
+    }else{
+<span class="fc" id="L44">      throw new IllegalArgumentException(&quot;Task not found: &quot; + taskId);</span>
+    }
+<span class="fc" id="L46">  }</span>
+  public Task getTask(String taskId){
+<span class="fc" id="L48">    return tasks.get(taskId);</span>
+  }
+  public void printTasks(){
+<span class="fc bfc" id="L51" title="All 2 branches covered.">    for(Task task : tasks.values()){</span>
+<span class="fc" id="L52">      task.printContactDetails();</span>
+<span class="fc" id="L53">    }</span>
+<span class="fc" id="L54">  }</span>
+  public Map&lt;String, Task&gt; getAllTasks() {
+<span class="fc" id="L56">        return tasks;</span>
+    }
+
+  public void clearTasks() {
+<span class="fc" id="L60">      tasks.clear(); // Clear the tasks map</span>
+<span class="fc" id="L61">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
